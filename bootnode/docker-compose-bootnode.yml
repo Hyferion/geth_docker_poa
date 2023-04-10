@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  bootnode-bcts:
+    hostname: bootnode-bcts
+    env_file:
+      - .env
+    image: geth-client
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command:
+      --nodekeyhex="b0ac22adcad37213c7c565810a50f1772291e7b0ce53fb73e7ec2a3c75bc13b5"
+      --nodiscover
+      --ipcdisable
+      --networkid=${NETWORK_ID}
+      --gcmode=archive
+    ports:
+      - "30303:30303"
+      - "8551:8551"

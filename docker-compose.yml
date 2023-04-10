@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  rpc-bcts:
+    hostname: rpc-bcts
+    env_file:
+      - ../.env
+    image: geth-client
+    command:
+      --bootnodes="enode://af22c29c316ad069cf48a09a4ad5cf04a251b411e45098888d114c6dd7f489a13786620d5953738762afa13711d4ffb3b19aa5de772d8af72f851f7e9c5b164a@bootnode-bcts:30303"
+      --allow-insecure-unlock
+      --http
+      --http.addr="0.0.0.0"
+      --http.port "8545"
+      --http.api="eth,web3,net,admin,personal,txpool,clique"
+      --http.corsdomain="*"
+      --networkid="${NETWORK_ID}"
+      --password="${ACCOUNT_PASSWORD}"
+      --gcmode=archive
+    ports:
+      - "8545:8545"
